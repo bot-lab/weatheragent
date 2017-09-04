@@ -4,6 +4,8 @@ const app = express();
 const router = express.Router();
 const AllBot = require('allbot');
 
+const ApiAiHandler = require('./controllers/apiaiwebhook');
+
 const rawBodySaver = function (req, res, buf, encoding) {
   if (buf && buf.length) {
     req.rawBody = buf.toString(encoding || 'utf8');
@@ -25,7 +27,6 @@ app.use(function(req, res, next) {
 
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
-console.log(configuration.allbot);
 
 // Add this
 allBot.onMessage((sessionKey,message) => {
@@ -35,6 +36,8 @@ allBot.onMessage((sessionKey,message) => {
 app.get('/', function (req, res) {
   res.send('hello bot top')
 });
+
+
 
 app.use(configuration.allbot.endpointURL, allBot.router);
 
