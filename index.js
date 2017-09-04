@@ -36,6 +36,7 @@ allBot.onMessage((sessionKey,message) => {
 
   const textReceived = message.content.text;
 
+  console.log('message',JSON.stringify(message, null, 3));  
   console.log('textReceived',textReceived);
 
   const requestApiAI = apiai.textRequest(textReceived, {
@@ -51,7 +52,7 @@ allBot.onMessage((sessionKey,message) => {
       allBot.replyText(sessionKey,response.result.fulfillment.speech);
     else
       allBot.replyText(sessionKey,"Sorry cannot process your message.");
-    
+
   });
 
   requestApiAI.on('error', function(error) {
