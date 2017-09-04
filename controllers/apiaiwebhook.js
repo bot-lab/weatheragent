@@ -12,9 +12,12 @@ class ApiAIHandler {
             const city = req.body.result.parameters['geo-city'];
             const date = req.body.result.parameters['date'];
 
+            if(date == '')
+                date = 'today';
+            
             res.json({
-                'speech':'Tomorrow is sunny day.',
-                'displayText':'Tomorrow is sunny day.'
+                'speech':" Weather for " + date + " in " + city + "? Probably it is sunny.",
+                'displayText':" Weather for " + date + " in " + city + "? Probably it is sunny.",
             })
 
         });
