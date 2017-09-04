@@ -34,8 +34,6 @@ const apiai = ApiAI("05cb4f6a12624fc3954bafa7108c5b9b");
 // Add this
 allBot.onMessage((sessionKey,message) => {
 
-  console.log(sessionKey,message);
-
   const textReceived = message.content.text;
 
 
@@ -44,7 +42,7 @@ allBot.onMessage((sessionKey,message) => {
   });
 
   requestApiAI.on('response', function(response) {
-    console.log(response.result.source);
+    console.log(response.result);
     allBot.replyText(sessionKey,response.result.source.fulfillments.speech);
   });
 
