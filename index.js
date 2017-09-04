@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
 
 
 app.use(configuration.allbot.endpointURL, allBot.router);
-app.use('/apiai', apiAIHandler.router);
+app.use(configuration.allbot.endpointURL + '/apiai', apiAIHandler.router);
 
 app.listen(configuration.port, function () {
     console.log('Hello bot is listening on port ' + configuration.port)
