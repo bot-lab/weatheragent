@@ -36,11 +36,12 @@ allBot.onMessage((sessionKey,message) => {
 
   const textReceived = message.content.text;
 
-
+  console.log('textReceived',textReceived);
+  
   const requestApiAI = apiai.textRequest(textReceived, {
     sessionId: sessionKey
   });
-
+  
   requestApiAI.on('response', function(response) {
     console.log(response.result);
     allBot.replyText(sessionKey,response.result.fulfillment.speech);
@@ -52,8 +53,6 @@ allBot.onMessage((sessionKey,message) => {
   });
 
   requestApiAI.end();
-
-  
   
 });
 
