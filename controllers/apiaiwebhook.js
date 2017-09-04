@@ -14,11 +14,16 @@ class ApiAIHandler {
 
             if(date == '')
                 date = 'today';
+        
+            if(city && date){
+                res.json({
+                    'speech':" Weather for " + date + " in " + city + "? Probably it is sunny.",
+                    'displayText':" Weather for " + date + " in " + city + "? Probably it is sunny.",
+                })
+            } else {
+                res.json({});
+            }
 
-            res.json({
-                'speech':" Weather for " + date + " in " + city + "? Probably it is sunny.",
-                'displayText':" Weather for " + date + " in " + city + "? Probably it is sunny.",
-            })
 
         });
 
