@@ -39,8 +39,10 @@ allBot.onMessage((sessionKey,message) => {
   console.log('message',JSON.stringify(message, null, 3));  
   console.log('textReceived',textReceived);
 
+  const userIdChunks = message.userIdentifier.split(':');
+
   const requestApiAI = apiai.textRequest(textReceived, {
-    sessionId: message.userIdentifier
+    sessionId: userIdChunks[2]
   });
   
   requestApiAI.on('response', function(response) {
