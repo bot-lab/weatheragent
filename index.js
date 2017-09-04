@@ -27,6 +27,7 @@ app.use(function(req, res, next) {
 
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
+const apiAIHandler = new ApiAiHandler();
 
 // Add this
 allBot.onMessage((sessionKey,message) => {
@@ -40,6 +41,7 @@ app.get('/', function (req, res) {
 
 
 app.use(configuration.allbot.endpointURL, allBot.router);
+app.use('/apiai', apiAIHandler.router);
 
 app.listen(configuration.port, function () {
     console.log('Hello bot is listening on port ' + configuration.port)

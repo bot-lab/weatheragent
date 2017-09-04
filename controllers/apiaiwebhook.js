@@ -5,7 +5,7 @@ class ApiAIHandler {
 
     constructor() {
 
-        router.post(this.configuration.webhookReceiverURL, (req,res) => {
+        router.post('/webhook', (req,res) => {
 
             console.log('Received POST request.',req.body);
 
