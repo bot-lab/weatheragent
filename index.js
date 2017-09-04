@@ -38,7 +38,7 @@ allBot.onMessage((sessionKey,message) => {
 
   const textReceived = message.text;
 
-  const requestApiAI = allBot.textRequest(textReceived, {
+  const requestApiAI = apiai.textRequest(textReceived, {
     sessionId: sessionKey
   });
 
