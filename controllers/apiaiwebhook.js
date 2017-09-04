@@ -7,7 +7,7 @@ class ApiAIHandler {
 
         router.post('/webhook', (req,res) => {
 
-            console.log('Received POST request.',req.body);
+            console.log('Received POST request.',JSON.stringify(req.body, null, 3));
 
             let city = req.body.result.parameters['geo-city'];
             let date = req.body.result.parameters['date'];
@@ -21,7 +21,10 @@ class ApiAIHandler {
                     'displayText':" Weather for " + date + " in " + city + "? Probably it is sunny.",
                 })
             } else {
-                res.json({});
+                res.json({
+                    'speech':req.body.result.fulfillment.speech,
+                    'displayText':req.body.result.fulfillment.speech
+                });
             }
 
 
