@@ -17,7 +17,7 @@ class ApiAIHandler {
             }
             
             if(city){
-                
+
                 this.askWather(city).then((data) => {
     
                     console.log('Yahoo API response.',JSON.stringify(data, null, 3));
@@ -29,6 +29,8 @@ class ApiAIHandler {
                         const formatedDate = new Date(item.date).
                         toLocaleString('en-us', {year: 'numeric', month: '2-digit', day: '2-digit'}).
                         replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2');
+                        
+                        console.log(formatedDate,date);
                         
                         return formatedDate = date;
     
@@ -50,8 +52,10 @@ class ApiAIHandler {
     
                     }
     
-                }).catch(() => {
-    
+                }).catch((err) => {
+                    
+                    console.log('yahoo api error',err);
+
                     res.json({
                         'speech':req.body.result.fulfillment.speech,
                         'displayText':req.body.result.fulfillment.speech
@@ -86,7 +90,7 @@ class ApiAIHandler {
               var condition = data.query.results.channel.item.condition;
               
               if(err){
-                  reject()
+                  reject(err)
               }else{
                   resolve(data);
               }
