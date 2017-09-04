@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
 const AllBot = require('allbot');
+const ApiAI = require('apiai');
 
 const ApiAiHandler = require('./controllers/apiaiwebhook');
 
@@ -28,17 +29,34 @@ app.use(function(req, res, next) {
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
 const apiAIHandler = new ApiAiHandler();
+const apiai = ApiAI("05cb4f6a12624fc3954bafa7108c5b9b");
 
 // Add this
 allBot.onMessage((sessionKey,message) => {
+
+  console.log(sessionKey,message);
+
+  const requestApiAI = app.textRequest('Hi', {
+    sessionId: 'test'
+  });
+
+  requestApiAI.on('response', function(response) {
+    console.log(response);
+  });
+
+  requestApiAI.on('error', function(error) {
+    console.log(error);
+  });
+
+  requestApiAI.end();
+
   allBot.replyText(sessionKey,"Hello 2");
+  
 });
 
 app.get('/', function (req, res) {
   res.send('hello bot top')
 });
-
-
 
 app.use(configuration.allbot.endpointURL, allBot.router);
 app.use(configuration.allbot.endpointURL + '/apiai', apiAIHandler.router);

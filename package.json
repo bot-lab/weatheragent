@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "allbot": "^0.1.2",
+    "apiai": "^4.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4"
   },
