@@ -45,15 +45,17 @@ allBot.onMessage((sessionKey,message) => {
 
   requestApiAI.on('response', function(response) {
     console.log(response);
+    allBot.replyText(sessionKey,response.result.fulfillments.speech);
   });
 
   requestApiAI.on('error', function(error) {
     console.log(error);
+    allBot.replyText(sessionKey,"Sorry please send again.");
   });
 
   requestApiAI.end();
 
-  allBot.replyText(sessionKey,"Hello 2");
+  
   
 });
 
