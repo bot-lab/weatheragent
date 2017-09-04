@@ -31,8 +31,8 @@ class ApiAIHandler {
                         replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2');
                         
                         console.log(formatedDate,date);
-                        
-                        return formatedDate = date;
+
+                        return formatedDate == date;
     
                     });
     
