@@ -67,12 +67,12 @@ allBot.onMessage((sessionKey,message) => {
 });
 
 app.get('/', function (req, res) {
-  res.send('hello bot top')
+  res.send('Weater bot top')
 });
 
 app.use(configuration.allbot.endpointURL, allBot.router);
 app.use(configuration.allbot.endpointURL + '/apiai', apiAIHandler.router);
 
 app.listen(configuration.port, function () {
-    console.log('Hello bot is listening on port ' + configuration.port)
+    console.log('Weater bot is listening on port ' + configuration.port)
 })
