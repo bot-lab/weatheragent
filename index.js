@@ -25,6 +25,7 @@ app.use(function(req, res, next) {
 
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
+console.log(configuration.allbot);
 
 // Add this
 allBot.onMessage((sessionKey,message) => {
