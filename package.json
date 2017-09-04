@@ -1,0 +1,25 @@
+{
+  "name": "hellobot",
+  "version": "1.0.0",
+  "description": "Hello Bot is sample of using ALLBOT. It replies \"Hello\" for any received message.",
+  "main": "index.js",
+  "dependencies": {
+    "allbot": "^0.1.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bot-lab/hellobot.git"
+  },
+  "author": "Ken Yasue <ken@botlab.agency> (http://allbot.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bot-lab/hellobot/issues"
+  },
+  "homepage": "https://github.com/bot-lab/hellobot#readme"
+}
