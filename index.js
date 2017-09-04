@@ -44,7 +44,14 @@ allBot.onMessage((sessionKey,message) => {
   
   requestApiAI.on('response', function(response) {
     console.log('API AI response',JSON.stringify(response, null, 3));
-    allBot.replyText(sessionKey,response.result.fulfillment.speech);
+
+    const replyFromAI = response.result.fulfillment.speech;
+
+    if(replyFromAI && replyFromAI.length > 0)
+      allBot.replyText(sessionKey,response.result.fulfillment.speech);
+    else
+      allBot.replyText(sessionKey,"Sorry cannot process your message.");
+    
   });
 
   requestApiAI.on('error', function(error) {
