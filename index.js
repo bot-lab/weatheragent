@@ -44,8 +44,8 @@ allBot.onMessage((sessionKey,message) => {
   });
 
   requestApiAI.on('response', function(response) {
-    console.log(response.result);
-    allBot.replyText(sessionKey,response.result.fulfillments.speech);
+    console.log(response.result.source);
+    allBot.replyText(sessionKey,response.result.source.fulfillments.speech);
   });
 
   requestApiAI.on('error', function(error) {
