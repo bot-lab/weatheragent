@@ -43,7 +43,7 @@ allBot.onMessage((sessionKey,message) => {
 
   requestApiAI.on('response', function(response) {
     console.log(response.result);
-    allBot.replyText(sessionKey,response.result.source.fulfillments.speech);
+    allBot.replyText(sessionKey,response.result.fulfillment.speech);
   });
 
   requestApiAI.on('error', function(error) {
