@@ -6,6 +6,7 @@ const AllBot = require('allbot');
 const ApiAI = require('apiai');
 
 const ApiAiHandler = require('./controllers/apiaiwebhook');
+const ApiAiJapaneseHandler = require('./controllers/apiaiwebhook.ja');
 
 const rawBodySaver = function (req, res, buf, encoding) {
   if (buf && buf.length) {
@@ -29,7 +30,8 @@ app.use(function(req, res, next) {
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
 const apiAIHandler = new ApiAiHandler();
-const apiai = ApiAI("05cb4f6a12624fc3954bafa7108c5b9b");
+const apiaiEn = ApiAI("05cb4f6a12624fc3954bafa7108c5b9b");
+const apiaiJa = ApiAI("667b685c11e84b2c9ae353add7949088");
 
 // Add this
 allBot.onMessage((sessionKey,message) => {
@@ -41,7 +43,7 @@ allBot.onMessage((sessionKey,message) => {
 
   const userIdChunks = message.userIdentifier.split(':');
 
-  const requestApiAI = apiai.textRequest(textReceived, {
+  const requestApiAI = apiaiEn.textRequest(textReceived, {
     sessionId: userIdChunks[2]
   });
   
@@ -72,6 +74,7 @@ app.get('/', function (req, res) {
 
 app.use(configuration.allbot.endpointURL, allBot.router);
 app.use(configuration.allbot.endpointURL + '/apiai', apiAIHandler.router);
+app.use(configuration.allbot.endpointURL + '/apiaija', ApiAiJapaneseHandler.router);
 
 app.listen(configuration.port, function () {
     console.log('Weater bot is listening on port ' + configuration.port)
