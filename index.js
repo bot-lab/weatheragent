@@ -47,15 +47,16 @@ allBot.onMessage((sessionKey,message) => {
   const serviceId = userIdChunks[1];
   const requestApiAI = null;
 
-  console.log('serviceId',serviceId);
-  
   if(serviceId == 'facebook-weatherbot-en'){
+
+    console.log('send to facebook english weather bot');
 
     requestApiAI = apiaiEn.textRequest(textReceived, {
       sessionId: userIdChunks[2]
     });
 
     requestApiAI.on('response', function(response) {
+
       console.log('API AI response',JSON.stringify(response, null, 3));
   
       const replyFromAI = response.result.fulfillment.speech;
@@ -72,15 +73,14 @@ allBot.onMessage((sessionKey,message) => {
       allBot.replyText(sessionKey,"Sorry please send again.");
     });
 
+    requestApiAI.end();
+
   }
   
   if(!requestApiAI){
     console.log('No service found');
     return;
   }
-  
-
-  requestApiAI.end();
   
 });
 
