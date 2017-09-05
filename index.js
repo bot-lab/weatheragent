@@ -45,7 +45,7 @@ allBot.onMessage((sessionKey,message) => {
 
   const userIdChunks = message.userIdentifier.split(':');
   const serviceId = userIdChunks[1];
-  const requestApiAI = null;
+  let requestApiAI = null;
 
   if(serviceId == 'facebook-weatherbot-en'){
 
