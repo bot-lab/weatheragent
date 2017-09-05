@@ -44,27 +44,41 @@ allBot.onMessage((sessionKey,message) => {
   console.log('textReceived',textReceived);
 
   const userIdChunks = message.userIdentifier.split(':');
+  const serviceId = userIdChunks[1];
+  const requestApiAI = null;
 
-  const requestApiAI = apiaiEn.textRequest(textReceived, {
-    sessionId: userIdChunks[2]
-  });
+  console.log('serviceId',serviceId);
   
-  requestApiAI.on('response', function(response) {
-    console.log('API AI response',JSON.stringify(response, null, 3));
+  if(serviceId == 'facebook-weatherbot-en'){
 
-    const replyFromAI = response.result.fulfillment.speech;
+    requestApiAI = apiaiEn.textRequest(textReceived, {
+      sessionId: userIdChunks[2]
+    });
 
-    if(replyFromAI && replyFromAI.length > 0)
-      allBot.replyText(sessionKey,response.result.fulfillment.speech);
-    else
-      allBot.replyText(sessionKey,"Sorry cannot process your message.");
+    requestApiAI.on('response', function(response) {
+      console.log('API AI response',JSON.stringify(response, null, 3));
+  
+      const replyFromAI = response.result.fulfillment.speech;
+  
+      if(replyFromAI && replyFromAI.length > 0)
+        allBot.replyText(sessionKey,response.result.fulfillment.speech);
+      else
+        allBot.replyText(sessionKey,"Sorry cannot process your message.");
+  
+    });
+  
+    requestApiAI.on('error', function(error) {
+      console.log(error);
+      allBot.replyText(sessionKey,"Sorry please send again.");
+    });
 
-  });
-
-  requestApiAI.on('error', function(error) {
-    console.log(error);
-    allBot.replyText(sessionKey,"Sorry please send again.");
-  });
+  }
+  
+  if(!requestApiAI){
+    console.log('No service found');
+    return;
+  }
+  
 
   requestApiAI.end();
   
