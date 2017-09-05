@@ -76,6 +76,36 @@ allBot.onMessage((sessionKey,message) => {
     requestApiAI.end();
 
   }
+
+  if(serviceId == 'line-weatherbot-ja'){
+
+    console.log('send to line japanese weather bot');
+
+    requestApiAI = apiaiJa.textRequest(textReceived, {
+      sessionId: userIdChunks[2]
+    });
+
+    requestApiAI.on('response', function(response) {
+
+      console.log('API AI response',JSON.stringify(response, null, 3));
+  
+      const replyFromAI = response.result.fulfillment.speech;
+  
+      if(replyFromAI && replyFromAI.length > 0)
+        allBot.replyText(sessionKey,response.result.fulfillment.speech);
+      else
+        allBot.replyText(sessionKey,"なんかよくわかんね");
+  
+    });
+  
+    requestApiAI.on('error', function(error) {
+      console.log(error);
+      allBot.replyText(sessionKey,"エラー起きたからもっかい送って");
+    });
+
+    requestApiAI.end();
+
+  }
   
   if(!requestApiAI){
     console.log('No service found');
