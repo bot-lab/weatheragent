@@ -30,6 +30,8 @@ app.use(function(req, res, next) {
 const configuration = require('./init');
 const allBot = new AllBot(configuration.allbot);
 const apiAIHandler = new ApiAiHandler();
+const apiAIHandlerJapanese = new ApiAiJapaneseHandler();
+
 const apiaiEn = ApiAI("05cb4f6a12624fc3954bafa7108c5b9b");
 const apiaiJa = ApiAI("667b685c11e84b2c9ae353add7949088");
 
@@ -74,7 +76,7 @@ app.get('/', function (req, res) {
 
 app.use(configuration.allbot.endpointURL, allBot.router);
 app.use(configuration.allbot.endpointURL + '/apiai', apiAIHandler.router);
-app.use(configuration.allbot.endpointURL + '/apiaija', ApiAiJapaneseHandler.router);
+app.use(configuration.allbot.endpointURL + '/apiaija', apiAIHandlerJapanese.router);
 
 app.listen(configuration.port, function () {
     console.log('Weater bot is listening on port ' + configuration.port)
